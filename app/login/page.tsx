@@ -1,23 +1,60 @@
+'use client'
 import Link from 'next/link'
-import React from 'react'
+import {useRef} from 'react'
+import { Metadata } from 'next'
+import InputField from '../components/InputField'
+
+import Image from 'next/image'
+
+const metadata: Metadata = {
+    title: 'Login',
+    description: 'This is the login page'
+
+}
+
+// const handleLogin = (e) => {
+//     e.preventDefault()
+//     console.log()
+    
+// }
 
 const Login = () => {
+    const usernameRef = useRef<HTMLInputElement>(null)
+    const passwordRef = useRef<HTMLInputElement>(null)
+
+   const formRef = document.querySelector('.login-form') as HTMLFormElement
+
+    formRef?.addEventListener('submit', (e: Event)=>{
+            e.preventDefault()
+
+            console.log(usernameRef.current?.value, passwordRef.current?.value)
+            console.log('submitted...')
+    })
+
   return (
     <div className='flex justify-center items-center mt-10 '>
-        <form action="" className='border border-grey-200 px-3 py-5'>
-            <p className='text-center text-lg text-bold'>Login to your account</p>
+        <form action="" method='post' className='login-form rounded-md border border-grey-200 px-3 py-5'>
 
-            <div className='mt-8'>
-                <label htmlFor="" className='block text-gray-700 text-sm'>Username</label>
-                <input type='text' name='username' className='w-100 focus px-2 py-1 shadow appearance-none rounded focus:shadow-outline focus:outline-none focus:border-green-600'/>
-            </div>
-            <div>
-                <label htmlFor="" className=' mt-2 block text-gray-700 text-sm'>Password</label>
-                <input type='password' name='password' className='w-100 px-2 py-1 shadow appearance-none rounded focus:outline-none focus:border-green-600'/>
-            </div>
 
-            <div className='flex justify-center items-center'>
-                <button className='bg-blue-500 text-white rounded px-4 py-1 my-3'>
+            <div className='flex justify-center items-center flex-col my-3 '>
+                <Image
+                    src={'/images/logo.png'}
+                    width={50}
+                    height={50}
+                    alt='nextgig logo'
+                />
+                <p className='text-center'>My<span className='text-blue-500'>Next</span>One</p>
+            </div>
+           
+            
+            
+            <p className='text-center text-xl mb-4 text-bold'>Login to your account</p>
+
+            <InputField  ref={usernameRef} type="text" label="Username" name="username" placeholder='Enter your username...'/>
+            <InputField  ref={passwordRef} type="password" label="Password" name="password" placeholder='Enter your password...'/>
+        
+            <div className='flex justify-center items-center my-3'>
+                <button type='submit' className='bg-blue-500 text-white rounded px-4 py-1 '>
                     Login
                 </button>
             </div>
