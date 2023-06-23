@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import Footer from './Footer'
 import NavBar from './NavBar'
 import './globals.css'
@@ -10,14 +11,16 @@ export const metadata = {
   description: 'My first next js app',
 }
 
-export default function RootLayout({
-  children,
-}: {
+export default function RootLayout({children,}: {
   children: React.ReactNode
 }) {
+
+  // const routes = useRouter()
+  
   return (
     <html lang="en">
       <body className={inter.className}>
+        {/* {routes.} */}
         <NavBar />
         {children}
         <Footer />
